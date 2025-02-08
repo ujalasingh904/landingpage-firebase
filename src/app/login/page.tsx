@@ -1,4 +1,5 @@
 'use client';
+
 import {
     signInWithEmailAndPassword,
     signInWithPopup,
@@ -21,12 +22,10 @@ const Form = () => {
         e.preventDefault();
         try {
             if (isLogin) {
-                await signInWithEmailAndPassword(auth, email, password);
-                sessionStorage.setItem("user", JSON.stringify(auth.currentUser));
+                await signInWithEmailAndPassword(auth, email, password); 
                 console.log("User signed in");
             } else {
-                await createUserWithEmailAndPassword(auth, email, password);
-                sessionStorage.setItem("user", JSON.stringify(auth.currentUser));
+                await createUserWithEmailAndPassword(auth, email, password); 
                 console.log("User registered");
             }
             router.push("/");
@@ -39,8 +38,7 @@ const Form = () => {
     const handleGoogleSignIn = async () => {
         try {
 
-            await signInWithPopup(auth, googleProvider);
-            sessionStorage.setItem("user", JSON.stringify(auth.currentUser));
+            await signInWithPopup(auth, googleProvider); 
             console.log("Google sign-in successful");
             router.push("/");
         } catch (err : any) {

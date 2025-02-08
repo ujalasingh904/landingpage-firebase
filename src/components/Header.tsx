@@ -9,28 +9,18 @@ import Image from "next/image";
 
 export default function Header() {
 
-  const getUserFromSession = () => {
-    const storedUser = sessionStorage.getItem("user");
-    try {
-      return storedUser ? JSON.parse(storedUser) : null;
-    } catch (error) {
-      console.error("Error parsing user from session storage", error);
-      return null;
-    }
-  }
+   
 
-  const [user, setUser] = useState<User | null>(getUserFromSession());
+  const [user, setUser] = useState<User | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        setUser(currentUser);
-        sessionStorage.setItem("user", JSON.stringify(currentUser));
+        setUser(currentUser); 
       } else {
-        setUser(null);
-        sessionStorage.removeItem("user");
+        setUser(null); 
       }
     });
 
@@ -40,8 +30,7 @@ export default function Header() {
 
   const handleLogout = async () => {
     await signOut(auth);
-    setUser(null);
-    sessionStorage.removeItem("user");
+    setUser(null); 
     setMenuOpen(false);
   };
 
