@@ -5,11 +5,9 @@ import { Button } from "@/components/ui/button";
 import { auth } from "@/firebase/firebaseconfig";
 import { useState, useEffect } from "react";
 import { onAuthStateChanged, signOut, User } from "firebase/auth";
-import Image from "next/image"; 
+import Image from "next/image";
 
 export default function Header() {
-
-   
 
   const [user, setUser] = useState<User | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,9 +16,9 @@ export default function Header() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        setUser(currentUser); 
+        setUser(currentUser);
       } else {
-        setUser(null); 
+        setUser(null);
       }
     });
 
@@ -30,7 +28,7 @@ export default function Header() {
 
   const handleLogout = async () => {
     await signOut(auth);
-    setUser(null); 
+    setUser(null);
     setMenuOpen(false);
   };
 
@@ -41,12 +39,35 @@ export default function Header() {
         <Link href="/" className="text-2xl font-bold text-gray-800">
           Logo
         </Link>
+        <ul className="flex space-x-12">
+          <li>
+            <Link href="/about" className="text-gray-600 hover:text-gray-800">
+              About
+            </Link>
+          </li>
+          <li>
+            <Link href="/contact" className="text-gray-600 hover:text-gray-800">
+              Contact
+            </Link>
+          </li>
+          <li>
+            <Link href="/services" className="text-gray-600 hover:text-gray-800">
+              Services
+            </Link>
+          </li>
+          <li>
+            <Link href="/blog" className="text-gray-600 hover:text-gray-800">
+              Blog
+            </Link>
+          </li>
+
+        </ul>
         <nav>
           {user ? (
             <div className="relative">
-              <button onClick={() => setMenuOpen(!menuOpen)}>
+              <button onClick={() => setMenuOpen(!menuOpen)} className="flex items-center">
                 <Image
-                  src={user?.photoURL || "/default-avatar.png"} 
+                  src={user?.photoURL || "/default-avatar.png"}
                   alt="User"
                   width={40}
                   height={40}
@@ -66,7 +87,7 @@ export default function Header() {
             </div>
           ) : (
             <Link href="/login">
-              <Button variant="outline">Login</Button>
+              <Button variant="outline" className="text-black">Login</Button>
             </Link>
           )}
         </nav>
