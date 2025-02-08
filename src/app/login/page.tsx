@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaGoogle } from "react-icons/fa"
 
-const Form: React.FC = () => {
+const Form = () => {
     const [isLogin, setIsLogin] = useState<boolean>(true);
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -38,10 +38,10 @@ const Form: React.FC = () => {
 
     const handleGoogleSignIn = async () => {
         try {
-            
+
             await signInWithPopup(auth, googleProvider);
             sessionStorage.setItem("user", JSON.stringify(auth.currentUser));
-            console.log("Google sign-in successful"); 
+            console.log("Google sign-in successful");
             router.push("/");
         } catch (err: any) {
             console.error(err);

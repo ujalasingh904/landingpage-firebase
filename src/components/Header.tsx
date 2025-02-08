@@ -5,15 +5,14 @@ import { Button } from "@/components/ui/button";
 import { auth } from "@/firebase/firebaseconfig";
 import { useState, useEffect } from "react";
 import { onAuthStateChanged, signOut, User } from "firebase/auth";
-import Image from "next/image";
-import { get } from "http";
+import Image from "next/image"; 
 
 export default function Header() {
 
   const getUserFromSession = () => {
     const storedUser = sessionStorage.getItem("user");
     return storedUser ? JSON.parse(storedUser) : null;
-  };
+  }; 
 
   const [user, setUser] = useState<User | null>(getUserFromSession());
   const [menuOpen, setMenuOpen] = useState(false);
