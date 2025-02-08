@@ -43,7 +43,7 @@ const Form = () => {
             sessionStorage.setItem("user", JSON.stringify(auth.currentUser));
             console.log("Google sign-in successful");
             router.push("/");
-        } catch (err: any) {
+        } catch (err : any) {
             console.error(err);
             setError(err.message);
         }

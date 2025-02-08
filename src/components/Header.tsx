@@ -11,8 +11,13 @@ export default function Header() {
 
   const getUserFromSession = () => {
     const storedUser = sessionStorage.getItem("user");
-    return storedUser ? JSON.parse(storedUser) : null;
-  }; 
+    try {
+      return storedUser ? JSON.parse(storedUser) : null;
+    } catch (error) {
+      console.error("Error parsing user from session storage", error);
+      return null;
+    }
+  }
 
   const [user, setUser] = useState<User | null>(getUserFromSession());
   const [menuOpen, setMenuOpen] = useState(false);
@@ -52,7 +57,7 @@ export default function Header() {
             <div className="relative">
               <button onClick={() => setMenuOpen(!menuOpen)}>
                 <Image
-                  src={user?.photoURL || "/default-avatar.png"}
+                  src={user?.photoURL || "/default-avatar.png"} 
                   alt="User"
                   width={40}
                   height={40}
